@@ -22,13 +22,12 @@ impl Window {
         let video_subsystem = sdl_context.video().unwrap();
 
         Window  {
-            window: video_subsystem.window(title, size.height, size.width),
+            window: video_subsystem.window(title, size.width, size.height),
             sdl_context
         }
     }
 
     pub fn show(&mut self)   {
-    
         let window = self.window.resizable().build().unwrap();
         let mut canvas = window.into_canvas().build().unwrap();
 
@@ -53,4 +52,17 @@ impl Window {
             canvas.present();
         }
     }
+}
+
+#[test]
+fn test_window()    {
+    let mut window = Window::new(
+        "test",
+        Size    {
+            height: 200,
+            width: 100,
+        }
+    );
+
+    window.show();
 }
